@@ -9,7 +9,6 @@ func mockWebsiteChecker(url string) bool {
 	if url == "http://vk.com" {
 		return false
 	}
-	
 	return true
 }
 
