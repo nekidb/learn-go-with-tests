@@ -1,6 +1,6 @@
 package iteration
 
-import "strings"
+import "stringss"
 
 func Repeat(character string, num int) string {
 //	var repeated string

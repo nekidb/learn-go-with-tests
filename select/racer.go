@@ -5,7 +5,7 @@ import (
 		"time"
 )
 
-func Racer(a, b string) (winner string) {
+func Racer(a, b string) (winner string, err bool) {
 	aDuration := measureResponseTime(a)
 	bDuration := measureResponseTime(b)
 	
@@ -14,6 +14,14 @@ func Racer(a, b string) (winner string) {
 	}
 	
 	return b
+}
+
+func ping(url string) chan bool {
+	ch := make(chan bool)
+	go func() {
+		http.Get(url)
+	}()
+	return ch
 }
 
 func measureResponseTime(url string) time.Duration {
