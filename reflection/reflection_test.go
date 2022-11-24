@@ -6,7 +6,7 @@ import (
 )
 
 type Person struct {
-	Name	string
+	Name string
 	Profile Profile
 }
 
@@ -26,41 +26,43 @@ func TestWalk(t *testing.T) {
 			"struct with one string field",
 			struct{
 				Name string
-			}{"Batman"},
-			[]string{"Batman"},
+			}{"John"},
+			[]string{"John"},
 		},
 		{
 			"struct with two string fields",
 			struct{
 				Name string
 				City string
-			}{"Batman", "Gotham"},
-			[]string{"Batman", "Gotham"},
+			}{"John", "Syktyvkar"},
+			[]string{"John", "Syktyvkar"},
 		},
 		{
-			"struct with non string field",
+			"struct with not string field",
 			struct{
 				Name string
 				Age int
-			}{"Batman", 35},
-			[]string{"Batman"},
+			}{"John", 44},
+			[]string{"John"},
 		},
 		{
-			"struct with nested fields",
-			Person{
-				"Batman",
-				Profile{35, "Gotham"},
-			},
-			[]string{"Batman", "Gotham"},
+			"nested fields",
+			Person{"John",
+				Profile{44, "Syktyvkar"}},
+			[]string{"John", "Syktyvkar"},
 		},
 		{
 			"pointer to struct",
-			&Person{
-				"Batman",
-				Profile{35, "Gotham"},
-			},
-			[]string{"Batman", "Gotham"},
+			&Person{"John",
+				Profile{44, "Syktyvar"}},
+			[]string{"John", "Syktyvar"},
 		},
+		{
+			"array of structs",
+			[]Profile{Profile{31, "Viktoria"}, Profile{44, "John"}},
+			[]string{"Viktoria", "John"},
+		},
+
 	}
 
 		for _, test := range cases {
