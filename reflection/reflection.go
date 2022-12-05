@@ -11,6 +11,10 @@ func walk(x interface{}, fn func(input string)) {
 		for i := 0; i < val.Len(); i++ {
 			walk(val.Index(i).Interface(), fn)
 		}
+	case reflect.Map:
+		for _, k := range val.MapKeys() {
+			walk(val.MapIndex(k).Interface(), fn)
+		}
 	case reflect.Struct:
 		for i := 0; i < val.NumField(); i++ {
 			field := val.Field(i)
